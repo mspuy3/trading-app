@@ -1,5 +1,10 @@
 <h1>Pages#home</h1>
 <% if current_user %>
+  <p>Your email is: <%= current_user.email %> </p>
+  <p>Your username is: <%= current_user.username %> </p>
+  <p>Are you an admin: <%= current_user.admin %> </p>
+  <p>Are you approved?: <%= current_user.approved %> </p>
+  <br/>
   <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
 <%else%>
   
