@@ -10,9 +10,9 @@
           <th>ID</th>
           <th>Email</th>
           <th>Username</th>
-          <th>Approved</th>
-          <th>Admin</th>
-          <th></th>
+          <th>Admin Status</th>
+          <th>Approve User</th>
+          <th>View Details</th>
         </tr>
       </thead>
       <tbody>
@@ -34,12 +34,12 @@
           </td>
           <td>
             <% @users.each do |user| %>
-              <%= user.approved %><hr>
+              <%= user.admin %><hr>
             <% end %>
           </td>
           <td>
             <% @users.each do |user| %>
-              <%= user.admin %><hr>
+              <%= link_to 'Approve', admin_pending_user_path(id: user.id, approved: true), method: :put %>
             <% end %>
           </td>
           <td>

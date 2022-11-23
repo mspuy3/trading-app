@@ -10,8 +10,8 @@
           <th>ID</th>
           <th>Email</th>
           <th>Username</th>
-          <th>Approved</th>
           <th>Admin</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -34,12 +34,12 @@
           </td>
           <td>
             <% @users.each do |user| %>
-              <%= user.approved %><hr>
+              <%= user.admin %><hr>
             <% end %>
           </td>
           <td>
             <% @users.each do |user| %>
-              <%= user.admin %><hr>
+              <%= link_to 'Suspend', admin_index_user_path(id: user.id, approved: false), method: :put %>
             <% end %>
           </td>
           <td>
