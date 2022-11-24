@@ -3,13 +3,35 @@ class AdminController < ApplicationController
     @users = User.all.where(approved: true, admin: false)
   end
 
-  def edit_user
+  def show_user
+    @user = User.find(params[:id])
   end
 
-  def show_user
+  def edit_user
+    @user = User.find(params[:id])
   end
+
+  def update_user
+    @user = User.find(params[:id])
+    @user.update(params.require(:user).permit(:username))
+    redirect_to admin_show_user_path(id: @user.id)
+  end
+
 
   def new_user
+    @user = User.new
+  end
+
+  def create_user
+    @user = User.new(params.require(:user).permit(:email, :password, :username))
+    @user.admin = false
+    @user.approved = true
+
+    if @user.save
+      redirect_to admin_show_user_path(id: @user.id), success: 'New user created'
+    else
+      render :new_user, status: :unprocessable_entity, danger: 'Failed'
+    end
   end
 
   def pending_user
@@ -20,7 +42,7 @@ class AdminController < ApplicationController
     @user = User.find(params[:id])
     @user.approved = params[:approved]
     @user.save
-    # ApprovalMailer.approve_user(@user.email).deliver_now
+    ApprovalMailer.approve_user(@user.email).deliver_now
     redirect_to admin_pending_user_path
   end
 

@@ -11,8 +11,9 @@
           <th>Email</th>
           <th>Username</th>
           <th>Admin Status</th>
-          <th>Approve User</th>
-          <th>View Details</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -39,12 +40,17 @@
           </td>
           <td>
             <% @users.each do |user| %>
-              <%= link_to 'Approve', admin_pending_user_path(id: user.id, approved: true), method: :put %>
+              <%= link_to 'Approve', admin_pending_user_path(id: user.id, approved: true), method: :put %><hr>
             <% end %>
           </td>
           <td>
             <% @users.each do |user| %>
-              <p>Link here for each view</p>
+              <%= link_to 'View', admin_show_user_path(id: user.id) %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'Edit Details', admin_edit_user_path(id: user.id) %><hr>
             <% end %>
           </td>
         </tr>

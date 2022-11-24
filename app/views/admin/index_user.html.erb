@@ -13,6 +13,7 @@
           <th>Admin</th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -39,12 +40,17 @@
           </td>
           <td>
             <% @users.each do |user| %>
-              <%= link_to 'Suspend', admin_index_user_path(id: user.id, approved: false), method: :put %>
+              <%= link_to 'Suspend', admin_index_user_path(id: user.id, approved: false), method: :put %><hr>
             <% end %>
           </td>
           <td>
             <% @users.each do |user| %>
-              <p>Link here for each view</p>
+              <%= link_to 'View', admin_show_user_path(id: user.id) %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'Edit Details', admin_edit_user_path(id: user.id) %><hr>
             <% end %>
           </td>
         </tr>
