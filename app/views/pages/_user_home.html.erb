@@ -1,1 +1,9 @@
-<p> You do not have admin privileges </p>
+<% if current_user.approved == true %>
+<h1> LINKS </h1>
+  <%= link_to 'Stocks Owned', stocks_path %>
+  <%= link_to 'Transactions', transactions_path %>
+  <%= link_to 'Buy Stocks', new_transaction_path %>
+  <%= link_to 'Sell Stocks', new_transaction_path %>
+<%else%>
+  <h1>You are not yet approved!</h1>
+<%end%>

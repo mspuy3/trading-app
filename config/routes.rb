@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
+
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -26,4 +27,11 @@ Rails.application.routes.draw do
     #showing all transactions
     get 'admin/index_transactions'
   end
+
+  authenticated :user, -> (user) { user.approved? } do
+    get 'user/index'
+    resources :transactions
+    resources :stocks
+  end
+
 end

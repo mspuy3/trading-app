@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+before_action :authenticate_user!
   def index_user
     @users = User.all.where(approved: true, admin: false)
   end

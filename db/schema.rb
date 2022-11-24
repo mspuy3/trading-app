@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_110439) do
+ActiveRecord::Schema.define(version: 2022_11_24_183500) do
+
+  create_table "stocks", force: :cascade do |t|
+    t.text "symbol"
+    t.string "name"
+    t.integer "shares"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_stocks_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "stock_id"
+    t.integer "shares"
+    t.decimal "share_price"
+    t.text "type"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,4 +54,6 @@ ActiveRecord::Schema.define(version: 2022_11_15_110439) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "stocks", "users"
+  add_foreign_key "transactions", "users"
 end
