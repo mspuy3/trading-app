@@ -1,0 +1,59 @@
+<h1>Admin#index_user</h1>
+<div class="">
+  <h2>Approved Trader's List</h2>
+  <% if @users.empty? %>
+    <h2>No Approved Traders Yet</h2>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Username</th>
+          <th>Admin</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.id %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.email %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.username %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.admin %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'Suspend', admin_index_user_path(id: user.id, approved: false), method: :put %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'View', admin_show_user_path(id: user.id) %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'Edit Details', admin_edit_user_path(id: user.id) %><hr>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>

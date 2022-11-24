@@ -1,0 +1,59 @@
+<h1>Admin#pending_user</h1>
+<div class="">
+  <h2>Pending Traders</h2>
+  <% if @users.empty? %>
+    <h2> No Pending </h2>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Username</th>
+          <th>Admin Status</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.id %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.email %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.username %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= user.admin %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'Approve', admin_pending_user_path(id: user.id, approved: true), method: :put %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'View', admin_show_user_path(id: user.id) %><hr>
+            <% end %>
+          </td>
+          <td>
+            <% @users.each do |user| %>
+              <%= link_to 'Edit Details', admin_edit_user_path(id: user.id) %><hr>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>

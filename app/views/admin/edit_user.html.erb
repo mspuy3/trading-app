@@ -1,0 +1,13 @@
+<h1>Admin#edit_user</h1>
+<hr/>
+<%= form_with scope: :user, model: @user, url: admin_show_user_path(id: @user.id), method: :put, local: true do |f| %>
+  <div class="">
+    <span>Username: </span>
+    <%= f.text_field :username, autofocus: true, value: @user.username, placeholder: "Username" %><br/>
+    <% @user.errors.full_messages_for(:username).each do |message| %>
+      <div class="error-message"><%= message %></div>
+    <% end %>
+  <div class="">
+    <%= f.button "Edit User", class: '' %>
+  </div>
+<% end %>

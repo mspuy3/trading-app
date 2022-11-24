@@ -1,0 +1,22 @@
+<h1>Admin#new_user</h1>
+<%= form_with scope: :user, model: @user, url: admin_new_user_path, method: :post, local: true do |f| %>
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %><br/>
+    <% @user.errors.full_messages_for(:email).each do |message| %>
+      <div class="error-message"><%= message %></div>
+    <% end %>
+    <br/>
+    <%= f.text_field :username, autofocus: true, autocomplete: :off, placeholder: "username" %><br/>
+    <% @user.errors.full_messages_for(:username).each do |message| %>
+      <div class="error-message"><%= message %></div>
+    <% end %>
+    <br/>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password (6 characters minimum)" %><br/>
+    <% @user.errors.full_messages_for(:password).each do |message| %>
+      <div class="error-message"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="">
+    <%= f.button "Create User", class: '' %>
+  </div>
+<% end %>
